@@ -390,7 +390,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat"><b>2023</b><span>Est. year</span></div>
-        <div class="stat"><b>43</b><span>Varieties in stock</span></div>
+        <div class="stat"><b>40</b><span>Varieties in stock</span></div>
         <div class="stat"><b>PESO</b><span>Licensed &amp; certified</span></div>
       </div>
     </div>
@@ -483,13 +483,13 @@
 
     <div class="cat-block" id="sparklers">
       <div class="cat-title"><h3>Sparklers</h3><span class="mono">/ hand-held</span></div>
-      <p class="cat-desc">Sold per box. (E) is electric colour, (C) is standard colour — the size is the wire length.</p>
+      <p class="cat-desc">Sold per packet. Each size lists both the electric (E) and colour (C) rate — the size shown is the wire length.</p>
       <div class="product-grid" data-cat="sparklers"></div>
     </div>
 
     <div class="cat-block" id="lar">
       <div class="cat-title"><h3>Lar</h3><span class="mono">/ string</span></div>
-      <p class="cat-desc">String crackers sold by count — 1K is roughly 1,000 crackers to a string.</p>
+      <p class="cat-desc">String crackers sold per box — 1K is roughly 1,000 crackers to a string.</p>
       <div class="product-grid" data-cat="lar"></div>
     </div>
 
@@ -640,65 +640,62 @@
 
     var products = {
       flowerpots: [
-        {name:'Big Flower Pot', qty:'Per piece', price:150},
-        {name:'Special Flower Pot', qty:'Per piece', price:200},
-        {name:'Ashoka', qty:'Per piece', price:300},
-        {name:'Colour Koti', qty:'Per piece', price:400},
-        {name:'Pinjore XXL Flower Pot', qty:'Per piece', price:1000}
+        {name:'Big Flower Pot', qty:'Per Box', price:150},
+        {name:'Special Flower Pot', qty:'Per Box', price:200},
+        {name:'Ashoka', qty:'Per Box', price:300},
+        {name:'Colour Koti', qty:'Per Box', price:400},
+        {name:'Pinjore XXL Flower Pot', qty:'Per Box', price:1000}
       ],
       chakkars: [
-        {name:'Special Chakra', qty:'Per piece', price:150},
-        {name:'Deluxe Chakra', qty:'Per piece', price:250},
-        {name:'Special Spinner', qty:'Per piece', price:300},
-        {name:'Deluxe Spinner', qty:'Per piece', price:400}
+        {name:'Special Chakra', qty:'Per Box', price:150},
+        {name:'Deluxe Chakra', qty:'Per Box', price:250},
+        {name:'Special Spinner', qty:'Per Box', price:300},
+        {name:'Deluxe Spinner', qty:'Per Box', price:400}
       ],
       sparklers: [
-        {name:'7m Sparklers (E)', qty:'Per box', price:30},
-        {name:'7m Sparklers (C)', qty:'Per box', price:30},
-        {name:'10m Sparklers (E)', qty:'Per box', price:50},
-        {name:'10m Sparklers (C)', qty:'Per box', price:50},
-        {name:'15m Sparklers (E)', qty:'Per box', price:120},
-        {name:'15m Sparklers (C)', qty:'Per box', price:120},
-        {name:'30m Sparklers (C)', qty:'Per box', price:150},
-        {name:'50m Sparklers (C)', qty:'Per box', price:350}
+        {name:'7m Sparklers (E/C)', qty:'Per Packet', variants:[{label:'E', price:30},{label:'C', price:35}]},
+        {name:'10m Sparklers (E/C)', qty:'Per Packet', variants:[{label:'E', price:50},{label:'C', price:50}]},
+        {name:'15m Sparklers (E/C)', qty:'Per Packet', variants:[{label:'E', price:120},{label:'C', price:120}]},
+        {name:'30m Sparklers (C)', qty:'Per Packet', price:150},
+        {name:'50m Sparklers (C)', qty:'Per Packet', price:350}
       ],
       lar: [
-        {name:'1K', qty:'Per string', variants:[{label:'Variant 1', price:400},{label:'Variant 2', price:500}]},
-        {name:'1K Red', qty:'Per string', price:600},
-        {name:'1K VAP', qty:'Per string', price:650},
-        {name:'2K (N)', qty:'Per string', price:900},
-        {name:'5K (N)', qty:'Per string', price:2000}
+        {name:'1K', qty:'Per Box', variants:[{label:'Variant 1', price:400},{label:'Variant 2', price:500}]},
+        {name:'1K Red', qty:'Per Box', price:600},
+        {name:'1K VAP', qty:'Per Box', price:650},
+        {name:'2K (N)', qty:'Per Box', price:900},
+        {name:'5K (N)', qty:'Per Box', price:2000}
       ],
       bomb: [
-        {name:'JM 3000 KRK', qty:'Per piece', price:200},
-        {name:'JM 5000 KRK', qty:'Per piece', price:300},
-        {name:'Rhino Power', qty:'Per piece', price:100},
-        {name:'Jug Mug Standard', qty:'Per piece', price:50}
+        {name:'JM 3000', qty:'Per Packet', price:200},
+        {name:'JM 5000', qty:'Per Packet', price:300},
+        {name:'Rhino Power', qty:'Per Packet', price:100},
+        {name:'Jug Mug Standard', qty:'Per Packet', price:50}
       ],
       chorsa: [
-        {name:'28 Chorsa', qty:'Per piece', price:30},
-        {name:'Giant', qty:'Per piece', price:50}
+        {name:'28 Chorsa', qty:'Per Packet', price:30},
+        {name:'Giant', qty:'Per Packet', price:50}
       ],
       singleshots: [
-        {name:'Single Shot 4"', qty:'Per piece', price:650},
-        {name:'Single Shot 3.5"', qty:'Per piece', price:550},
-        {name:'Single Shot 2"', qty:'Per piece', price:300},
-        {name:'Single Shot 2" (3 x 1)', qty:'Per piece', price:750},
-        {name:'3 in 1', qty:'Per piece', price:600}
+        {name:'Single Shot 4"', qty:'Per Piece', price:650},
+        {name:'Single Shot 3.5"', qty:'Per Piece', price:550},
+        {name:'Single Shot 2"', qty:'Per Piece', price:300},
+        {name:'Single Shot 2" (3 x 1)', qty:'Per Piece', price:750},
+        {name:'3 in 1', qty:'Per Piece', price:600}
       ],
       multipleshots: [
-        {name:'15 Shots', qty:'Per cake', price:650},
-        {name:'30 Shots', qty:'Per cake', price:1100},
-        {name:'60 Shots', qty:'Per cake', price:2100},
-        {name:'120 Shots', qty:'Per cake', price:4500}
+        {name:'15 Shots', qty:'Per Cake', price:650},
+        {name:'30 Shots', qty:'Per Cake', price:1100},
+        {name:'60 Shots', qty:'Per Cake', price:2100},
+        {name:'120 Shots', qty:'Per Cake', price:4500}
       ],
       fancy: [
-        {name:'Kit Kat', qty:'Per piece', price:50},
-        {name:'Penta', qty:'Per piece', price:350},
-        {name:'Bubloo', qty:'Per piece', price:300},
-        {name:'Pop Pop', qty:'Per piece', price:20},
-        {name:'Wonder', qty:'Per piece', price:30},
-        {name:'Bidi Bomb', qty:'Per piece', price:30}
+        {name:'Kit Kat', qty:'Per Packet', price:50},
+        {name:'Penta', qty:'Per Packet', price:350},
+        {name:'Bubloo', qty:'Per Packet', price:300},
+        {name:'Pop Pop', qty:'Per Packet', price:20},
+        {name:'Wonder', qty:'Per Packet', price:30},
+        {name:'Matchstick Bomb', qty:'Per Packet', price:30}
       ]
     };
 
