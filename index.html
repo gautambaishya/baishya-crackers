@@ -264,6 +264,13 @@
   .card-foot{
     margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px;
   }
+  .variant-list{
+    margin-top:auto; display:flex; flex-direction:column; gap:8px;
+  }
+  .variant-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .variant-row .price small{text-transform:uppercase; letter-spacing:0.04em;}
   .wa-btn{
     display:inline-flex; align-items:center; gap:6px;
     background:#25D366; color:#06210f; text-decoration:none;
@@ -383,7 +390,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat"><b>2023</b><span>Est. year</span></div>
-        <div class="stat"><b>44</b><span>Varieties in stock</span></div>
+        <div class="stat"><b>43</b><span>Varieties in stock</span></div>
         <div class="stat"><b>PESO</b><span>Licensed &amp; certified</span></div>
       </div>
     </div>
@@ -656,20 +663,19 @@
         {name:'50m Sparklers (C)', qty:'Per box', price:350}
       ],
       lar: [
-        {name:'1K', qty:'Per string', price:400},
-        {name:'1K', qty:'Per string', price:500},
+        {name:'1K', qty:'Per string', variants:[{label:'Variant 1', price:400},{label:'Variant 2', price:500}]},
         {name:'1K Red', qty:'Per string', price:600},
         {name:'1K VAP', qty:'Per string', price:650},
         {name:'2K (N)', qty:'Per string', price:900},
-        {name:'5000 (N)', qty:'Per string', price:2000}
+        {name:'5K (N)', qty:'Per string', price:2000}
       ],
       bomb: [
         {name:'JM 3000 KRK', qty:'Per piece', price:200},
         {name:'JM 5000 KRK', qty:'Per piece', price:300},
-        {name:'Rhino Power', qty:'Per piece', price:100}
+        {name:'Rhino Power', qty:'Per piece', price:100},
+        {name:'Jug Mug Standard', qty:'Per piece', price:50}
       ],
       chorsa: [
-        {name:'Jug Mug Standard', qty:'Per piece', price:50},
         {name:'28 Chorsa', qty:'Per piece', price:30},
         {name:'Giant', qty:'Per piece', price:50}
       ],
@@ -697,24 +703,40 @@
     };
 
     var waNumber = '918638012035';
+    var waIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.27-1.38a9.9 9.9 0 0 0 4.72 1.2h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Z"/></svg>';
+
+    function enquireLink(name, qty, label){
+      var text = label ? (name + ' (' + label + ', ' + qty + ')') : (name + ' (' + qty + ')');
+      var msg = encodeURIComponent('Hi Baishya Crackers, I would like to order: ' + text + '.');
+      return '<a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/' + waNumber + '?text=' + msg + '">' + waIcon + 'Enquire</a>';
+    }
+
     Object.keys(products).forEach(function(cat){
       var grid = document.querySelector('.product-grid[data-cat="' + cat + '"]');
       products[cat].forEach(function(p){
         var card = document.createElement('div');
         card.className = 'card';
-        var msg = encodeURIComponent('Hi Baishya Crackers, I would like to order: ' + p.name + ' (' + p.qty + ').');
+        var priceSection;
+        if (p.variants){
+          priceSection = '<div class="variant-list">' + p.variants.map(function(v){
+            return '<div class="variant-row">' +
+              '<span class="price">₹' + v.price + ' <small>' + v.label + '</small></span>' +
+              enquireLink(p.name, p.qty, v.label) +
+            '</div>';
+          }).join('') + '</div>';
+        } else {
+          priceSection =
+            '<div class="card-foot">' +
+              '<span class="price">₹' + p.price + '</span>' +
+              enquireLink(p.name, p.qty, null) +
+            '</div>';
+        }
         card.innerHTML =
           '<div class="card-top">' +
             '<h4>' + p.name + '</h4>' +
           '</div>' +
           '<span class="qty">' + p.qty + '</span>' +
-          '<div class="card-foot">' +
-            '<span class="price">₹' + p.price + ' <small>/ box</small></span>' +
-            '<a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/' + waNumber + '?text=' + msg + '">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.27-1.38a9.9 9.9 0 0 0 4.72 1.2h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Z"/></svg>' +
-              'Enquire' +
-            '</a>' +
-          '</div>';
+          priceSection;
         grid.appendChild(card);
       });
     });
